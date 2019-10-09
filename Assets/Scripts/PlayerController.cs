@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 ///<summary>Handles player control</summary>
 public class PlayerController : MonoBehaviour
@@ -8,8 +9,7 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     private int score = 0;
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey("w"))
         {
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(speed * Time.deltaTime, 0, 0);
         }
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -40,6 +41,20 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             Debug.Log ("Health: " + health);
+        }
+        if (other.tag == "Goal")
+        {
+            Debug.Log ("You win!");
+        }
+    }
+    void Update()
+    {
+        if (health <= 0)
+        {
+            Debug.Log ("Game Over!");
+            SceneManager.LoadScene("Maze", LoadSceneMode.Single);
+            score = 0;
+            health = 5;
         }
     }
 }
