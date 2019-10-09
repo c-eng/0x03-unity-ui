@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+///<summary>Handles camera control</summary>
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
