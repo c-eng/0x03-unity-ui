@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody body;
     public float speed = 750;
+    public int health = 5;
     private int score = 0;
 
     // Update is called once per frame
@@ -34,6 +35,11 @@ public class PlayerController : MonoBehaviour
             score++;
             Debug.Log ("Score: " + score);
             Destroy(other.gameObject);
+        }
+        if (other.tag == "Trap")
+        {
+            health--;
+            Debug.Log ("Health: " + health);
         }
     }
 }
