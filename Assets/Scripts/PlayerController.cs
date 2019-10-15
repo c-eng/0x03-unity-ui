@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             score++;
             Debug.Log ("Score: " + score);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         if (other.tag == "Trap")
         {
