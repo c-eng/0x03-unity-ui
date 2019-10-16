@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 ///<summary>Handles player control</summary>
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 750;
     public int health = 5;
     private int score = 0;
+    public Text scoreText;
 
     void FixedUpdate()
     {
@@ -34,7 +36,8 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Pickup")
         {
             score++;
-            Debug.Log ("Score: " + score);
+            //Debug.Log ("Score: " + score);
+            SetScoreText();
             other.gameObject.SetActive(false);
         }
         if (other.tag == "Trap")
@@ -56,5 +59,9 @@ public class PlayerController : MonoBehaviour
             score = 0;
             health = 5;
         }
+    }
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
     }
 }
