@@ -70,6 +70,10 @@ public class PlayerController : MonoBehaviour
             //Debug.Log ("Game Over!");
             //SceneManager.LoadScene("Maze", LoadSceneMode.Single);
         }
+        if (Input.GetKey("escape"))
+        {
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        }
     }
     void SetScoreText()
     {
