@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 ///<summary>Handles player control</summary>
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody body;
-    public float speed = 750;
     private int health = 5;
     private int score = 0;
+    public Rigidbody body;
+    public float speed = 750;
     public Text scoreText;
     public Text healthText;
+    public Text winLoseT;
+    public Image winLoseB;
 
     void FixedUpdate()
     {
@@ -49,17 +52,23 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag == "Goal")
         {
-            Debug.Log ("You win!");
+            winLoseB.color = Color.green;
+            winLoseT.color = Color.black;
+            winLoseT.text = "You Win!";
+            winLoseB.gameObject.SetActive(true);
+            StartCoroutine(LoadScene(3));
+            //Debug.Log ("You win!");
         }
     }
     void Update()
     {
         if (health <= 0)
         {
-            Debug.Log ("Game Over!");
-            SceneManager.LoadScene("Maze", LoadSceneMode.Single);
-            score = 0;
-            health = 5;
+            winLoseT.text = "Game Over!";
+            winLoseB.gameObject.SetActive(true);
+            StartCoroutine(LoadScene(3));
+            //Debug.Log ("Game Over!");
+            //SceneManager.LoadScene("Maze", LoadSceneMode.Single);
         }
     }
     void SetScoreText()
@@ -69,5 +78,12 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = "Health: " + health.ToString();
+    }
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Maze", LoadSceneMode.Single);
+        score = 0;
+        health = 5;
     }
 }
